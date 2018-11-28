@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main"
+        android:icon="@drawable/ic_star_border_black_24dp"
+        android:title="首页" />
+    <item
+        android:id="@+id/community"
+        android:icon="@drawable/ic_turned_in_not_black_24dp"
+        android:title="社区" />
+    <item
+        android:id="@+id/find"
+        android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+        android:title="发现" />
+
+    <item
+        android:id="@+id/me"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="我的"/>
+</menu>
