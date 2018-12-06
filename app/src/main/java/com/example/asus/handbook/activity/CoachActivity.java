@@ -3,6 +3,8 @@ package com.example.asus.handbook.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.StrictMode;
+import android.se.omapi.Session;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -11,10 +13,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +30,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
@@ -39,15 +50,21 @@ public class CoachActivity extends AppCompatActivity {
     private RecyclerView view_teaching;
     private MyAdapter tAdapter;
     private static String currentusername;
-    private List<String> values1,values2;
+    private List<String> values1,values2,values3,values4;
     private ImageView coachFigure;
     private TextView coachName, coachType;
     private static String coachname;
+
+    private TelephonyManager mTelephonyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
 
         currentusername = getIntent().getStringExtra("username");
         coachname = getIntent().getStringExtra("coachname");
@@ -144,11 +161,63 @@ public class CoachActivity extends AppCompatActivity {
             }
         });
 
+        values3 = new ArrayList<>();
+        values4 = new ArrayList<>();
+        view_teaching = findViewById(R.id.view_teaching);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this);// 将“我的课程”列表排列置为横向。
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        view_teaching.setLayoutManager(linearLayoutManager2);
+        view_teaching.setItemAnimator(new DefaultItemAnimator());
+        BmobQuery<Course> query3 = new BmobQuery<>();
+        query3.addWhereEqualTo("coachname",this.coachname);
+        query3.findObjects(new FindListener<Course>() {
+            @Override
+            public void done(List<Course> list, BmobException e) {
+                if(e == null){
+                    for(int i = 0;i < list.size();i++){
+                        values3.add(list.get(i).getName());
+                        values4.add(list.get(i).getImage());
+                        tAdapter = new MyAdapter("课程",currentusername,values3,values4, R.layout.layout_mycoursecard, CoachActivity.this);
+                        view_teaching.setAdapter(tAdapter);
+                    }
+                }
+                else{
+                    System.out.println("error");
+                    Toast ts = Toast.makeText(CoachActivity.this,getResources().getString(getResources().getIdentifier("stringShowTCFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                    ts.show() ;
+                }
+            }
+        });
+
+
     }
 
     // 致电教练
     public void makeCall(View view) {
 
+        BmobQuery<Coach> query=new BmobQuery<Coach>();
+        query.addWhereEqualTo("coachname",coachname);
+        query.findObjects(new FindListener<Coach>() {
+            @Override
+            public void done(List<Coach> list, BmobException e) {
+                if (e == null) {
+                    if (list.size() != 0) {
+                        String phoneNo = list.get(0).getCoachnumber();
+                        String dial = "tel:" + phoneNo;
+                        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
+                    } else {
+                        Toast ts = Toast.makeText(CoachActivity.this, getResources().getString(getResources().getIdentifier("getNumberFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                        ts.show();
+                    }
+                } else {
+                    System.out.println("error");
+                    Toast ts = Toast.makeText(CoachActivity.this, getResources().getString(getResources().getIdentifier("getNumberFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                    ts.show();
+                }
+
+            }
+        });
+        mTelephonyManager = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
     }
 
     // 传电邮给教练
@@ -212,12 +281,66 @@ public class CoachActivity extends AppCompatActivity {
                                     if(e == null){
                                         if(list.size() != 0){
                                             /* 发送邮件 */
-                                            Intent data=new Intent(Intent.ACTION_SENDTO);
-                                            data.setData(Uri.parse(list.get(0).getCoachmail()));
-                                            data.putExtra(Intent.EXTRA_EMAIL, Uri.parse(list.get(0).getCoachmail()));
-                                            data.putExtra(Intent.EXTRA_SUBJECT, mailTitle.getText().toString());
-                                            data.putExtra(Intent.EXTRA_TEXT, mailContent.getText().toString());
-                                            startActivity(data);
+                                            // 收件人电子邮箱
+                                            String to = list.get(0).getCoachmail();
+
+                                            // 发件人电子邮箱
+                                            String from = "yuzhou992999406@163.com";
+                                            ;
+                                            // 获取系统属性
+                                            Properties properties = new Properties();
+
+                                            // 设置邮件服务器
+                                            properties.setProperty("mail.transport.protocol", "SMTP");
+                                            properties.setProperty("mail.smtp.host", "smtp.163.com");
+                                            properties.setProperty("mail.smtp.port", "25");
+                                            properties.setProperty("mail.smtp.auth", "true");
+                                            properties.setProperty("mail.smtp.timeout", "1000");
+
+                                            // 获取默认session对象
+                                            javax.mail.Session session = javax.mail.Session.getDefaultInstance(properties,
+                                                    new Authenticator() {
+                                                        protected PasswordAuthentication getPasswordAuthentication() {
+                                                            // 登陆邮件发送服务器的用户名和密码
+                                                            return new PasswordAuthentication("yuzhou992999406@163.com", "abc837477816");
+                                                        }
+                                                    });
+
+                                            session.setDebug(true);
+
+                                            try{
+                                                // 创建默认的 MimeMessage 对象
+                                                MimeMessage message = new MimeMessage(session);
+
+                                                // 添加抄送
+                                                InternetAddress address = new InternetAddress(from);
+                                                message.setFrom(address);
+                                                message.addRecipient(Message.RecipientType.CC, address);
+
+                                                // Set To: 头部头字段
+                                                message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+                                                // Set Subject: 头部头字段
+                                                message.setSubject(mailTitle.getText().toString());
+
+                                                // 设置消息体
+                                                message.setText(mailContent.getText().toString());
+
+                                                Transport transport = session.getTransport("smtp");
+                                                transport.connect("smtp.163.com", 25, from, "abc837477816");
+                                                transport.sendMessage(message, message.getAllRecipients());
+                                                transport.close();
+
+                                                // 发送成功
+                                                Toast ts = Toast.makeText(CoachActivity.this,getResources().getString(getResources().getIdentifier("sendMailSuccess", "string", getPackageName())), Toast.LENGTH_LONG);
+                                                ts.show() ;
+
+                                            }
+                                            catch(Exception e2){
+                                                e2.printStackTrace();
+                                                Toast ts = Toast.makeText(CoachActivity.this,getResources().getString(getResources().getIdentifier("sendMailFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                                                ts.show() ;
+                                            }
                                         }
                                         else{
                                             Toast ts = Toast.makeText(CoachActivity.this,getResources().getString(getResources().getIdentifier("sendMailFail", "string", getPackageName())), Toast.LENGTH_LONG);
@@ -243,6 +366,30 @@ public class CoachActivity extends AppCompatActivity {
 
     // 传短信给教练
     public void sendMSG(View view) {
+
+        BmobQuery<Coach> query=new BmobQuery<Coach>();
+        query.addWhereEqualTo("coachname",coachname);
+        query.findObjects(new FindListener<Coach>() {
+            @Override
+            public void done(List<Coach> list, BmobException e) {
+                if (e == null) {
+                    if (list.size() != 0) {
+                        String phone = list.get(0).getCoachnumber();//电话号码
+                        Uri uri = Uri.parse("smsto:+86"+phone);
+                        Intent intentMessage = new Intent(Intent.ACTION_VIEW,uri);
+                        startActivity(intentMessage);
+                    } else {
+                        Toast ts = Toast.makeText(CoachActivity.this, getResources().getString(getResources().getIdentifier("getNumberFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                        ts.show();
+                    }
+                } else {
+                    System.out.println("error");
+                    Toast ts = Toast.makeText(CoachActivity.this, getResources().getString(getResources().getIdentifier("getNumberFail", "string", getPackageName())), Toast.LENGTH_LONG);
+                    ts.show();
+                }
+
+            }
+        });
 
     }
 }

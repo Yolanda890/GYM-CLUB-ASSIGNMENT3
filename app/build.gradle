@@ -18,6 +18,16 @@ android {
         }
     }
     useLibrary 'org.apache.http.legacy'
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.txt' // picks the JavaMail license file
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "https://maven.java.net/content/groups/public/"
+    }
 }
 
 dependencies {
@@ -40,5 +50,10 @@ dependencies {
     implementation 'cn.bmob.android:http-legacy:1.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //new
+    implementation 'com.sun.mail:android-mail:1.6.0'
+    implementation 'com.sun.mail:android-activation:1.6.0'
+
 
 }

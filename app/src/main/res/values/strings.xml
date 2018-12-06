@@ -107,14 +107,20 @@
     <string name="stringShowTCFail">无法显示教授的课程！</string>
     <string name="showCoachFail">教练信息显示失败，请返回！</string>
     <string name="showMailAddressFail">邮箱地址获取失败，请返回重试！</string>
+    <string name="getNumberFail">教练联系方式获取失败，请返回重试！</string>
     <string name="mailInputNull">邮件标题、内容不能为空！</string>
+    <string name="msgInputNull">短信内容不能为空！</string>
     <string name="sendMailFail">邮件发送失败，请返回重试！</string>
+    <string name="sendMSGFail">短信发送失败，请返回重试！</string>
     <!-- 教练个人界面 -->
 
     <!-- 发送邮件 -->
     <string name="dialogTitle">向教练发送邮件</string>
+    <string name="dialogTitle2">向教练发送短信</string>
     <string name="mailTitle">邮件标题</string>
     <string name="mailContent">邮件内容...</string>
+    <string name="msgContent">短信内容...</string>
+    <string name="sendMailSuccess">邮件发送成功！</string>
     <!-- 发送邮件 -->
 
 
