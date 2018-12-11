@@ -1,6 +1,7 @@
 package com.example.asus.handbook.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,18 +14,52 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.asus.handbook.R;
+import com.example.asus.handbook.activity.MovieActivity;
+import com.example.asus.handbook.dataobject.Course;
 
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> {
     private List<String> myList;
     private int rowLayout;
     private Context mContext;
+    private BmobFile coursevideo;
+    private String info;
+
 
     public VideoAdapter(List<String> myList, int rowLayout, Context context) {
         this.myList = myList;
         this.rowLayout = rowLayout;
         this.mContext = context;
+        final Intent intent = new Intent(mContext, MovieActivity.class);
+
+        final String entry = myList.get(0);  //查找Person表里面id为6b6c11c537的数据
+
+        BmobQuery<Course> query=new BmobQuery<Course>();
+        query.findObjects(new FindListener<Course>() {
+            @Override
+            public void done(List<Course> list, BmobException e) {
+                if (e == null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getName().equals(entry)){
+                            intent.putExtra("uri_video",list.get(i).getVideo());
+                            intent.putExtra("uri_introduction",list.get(i).getinfo());
+                            mContext.startActivity(intent);
+                            break;
+                        }
+                    }
+                }
+                else{
+                    Toast.makeText(mContext, "查找视频失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 
@@ -36,13 +71,17 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String entry = myList.get(i);
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+        final String entry = myList.get(i);
         viewHolder.myName.setText(entry);
         viewHolder.myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // viewHolder.myVideo.start();
+                // viewHolder.myVideo.start();
+                Intent intent = new Intent(mContext, MovieActivity.class);
+                intent.putExtra("uri",entry);
+                mContext.startActivity(intent);
+
             }
         });
         //mContext.getDrawable(country.getImageResourceId(mContext))
@@ -67,14 +106,14 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         public Button myButton; // 对应播放的按钮
         public ViewHolder(View itemView) {
             super(itemView);
-            myName =  itemView.findViewById(R.id.textView);
-            myVideo = itemView.findViewById(R.id.videoView);
-            myButton = itemView.findViewById(R.id.imageButton);
+            // myName =  itemView.findViewById(R.id.textView);
+            myVideo = itemView.findViewById(R.id.main_video);
+            //myButton = itemView.findViewById(R.id.imageButton);
         }
     }
 
-    class MyPlayerOnCompletionListener implements MediaPlayer.OnCompletionListener {
 
+    class MyPlayerOnCompletionListener implements MediaPlayer.OnCompletionListener {
         @Override
         public void onCompletion(MediaPlayer mp) {
             Toast.makeText(mContext, "播放完成了", Toast.LENGTH_SHORT).show();

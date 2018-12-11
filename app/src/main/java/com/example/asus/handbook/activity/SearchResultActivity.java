@@ -20,9 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.asus.handbook.R;
-import com.example.asus.handbook.adapter.SearchAdapter;
 import com.example.asus.handbook.dataobject.Coach;
-import com.example.asus.handbook.dataobject.Course;
 
 import java.util.ArrayList;
 import java.util.List;

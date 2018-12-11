@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.StrictMode;
-import android.se.omapi.Session;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -23,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.handbook.R;
-import com.example.asus.handbook.adapter.MyAdapter;
 import com.example.asus.handbook.dataobject.Coach;
 import com.example.asus.handbook.dataobject.Course;
 import com.squareup.picasso.Picasso;
@@ -34,7 +32,6 @@ import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;

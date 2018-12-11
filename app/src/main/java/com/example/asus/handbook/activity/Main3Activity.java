@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.*;
 import android.view.MenuItem;
 import com.example.asus.handbook.R;
-import com.example.asus.handbook.adapter.MyAdapter;
 import com.example.asus.handbook.dataobject.Course;
 import com.example.asus.handbook.dataobject.SC;
 

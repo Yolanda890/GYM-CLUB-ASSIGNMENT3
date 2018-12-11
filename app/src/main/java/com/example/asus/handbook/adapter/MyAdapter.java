@@ -1,7 +1,6 @@
 package com.example.asus.handbook.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.asus.handbook.R;
-import com.example.asus.handbook.activity.CoachActivity;
-import com.example.asus.handbook.userdefined.CircleTransform;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,8 +21,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private String currentusername;
 
     private List<String> list1,list2;
+    private List<String> list3;
     private int rowLayout;
     private Context mContext;
+    private VideoAdapter sAdapter;
 
                     /* 加2个参数 */
     public MyAdapter(String type,String currentusername,List<String> list1,List<String> list2, int rowLayout, Context context) {
@@ -48,6 +46,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                list3.add(entry);
+                sAdapter = new VideoAdapter(list3,R.layout.layout_coursecard, mContext);
             }
         });
         Picasso.with(mContext).load(list2.get(i)).into(viewHolder.myPic);
