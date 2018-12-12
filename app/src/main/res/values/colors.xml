@@ -9,7 +9,9 @@
     <color name="green">#00CD00</color>
     <color name="blue">#0000FF</color>
     <color name="palegray">#DCDCDC</color>
-
+    <color name="gray">#DCDCDC</color>
     <!-- new -->
     <color name="splitline">#8B6969</color>
+    <color name="map_buttonn">#E6E6FA</color>
+    <color name="dimgray">#708090</color>
 </resources>

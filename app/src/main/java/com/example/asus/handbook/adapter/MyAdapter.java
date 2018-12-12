@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.asus.handbook.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -34,20 +35,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         this.list1 = list1;
         this.list2 = list2;
+        this.list3=new ArrayList<>();
         this.rowLayout = rowLayout;
         this.mContext = context;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final String entry = list1.get(i);
         viewHolder.myName.setText(entry);
         viewHolder.myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list3.add(entry);
-                sAdapter = new VideoAdapter(list3,R.layout.layout_coursecard, mContext);
+                sAdapter = new VideoAdapter(list3,R.layout.layout_videocard, mContext);
             }
         });
         Picasso.with(mContext).load(list2.get(i)).into(viewHolder.myPic);
@@ -56,7 +58,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
         return new ViewHolder(v);  //this is the major change here.
     }

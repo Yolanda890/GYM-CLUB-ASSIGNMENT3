@@ -1,11 +1,11 @@
 package com.example.asus.handbook.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.design.widget.*;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.asus.handbook.R;
 import com.example.asus.handbook.adapter.CommunityAdapter;
 import com.example.asus.handbook.dataobject.Community;
+import com.example.asus.handbook.dataobject.MyUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,8 +27,6 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
-import com.example.asus.handbook.R;
-import com.example.asus.handbook.dataobject.MyUser;
 
 
 public class CommunityActivity extends AppCompatActivity {

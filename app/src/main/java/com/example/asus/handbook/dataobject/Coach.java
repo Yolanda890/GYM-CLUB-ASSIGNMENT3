@@ -20,7 +20,7 @@ public class Coach extends BmobObject {
         return coachnumber;
     }
 
-    public String getCoachmail(){
+    public String getCoachemail(){
         return coachemail;
     }
 
@@ -33,3 +33,4 @@ public class Coach extends BmobObject {
     }
 
 }
+

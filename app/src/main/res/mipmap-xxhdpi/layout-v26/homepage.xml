@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:contentDescription="@string/search"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/dp_4"
+        app:srcCompat="@drawable/ic_search_black_24dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_55"
+        android:autofillHints=""
+        android:inputType="textPersonName"
+        android:ems="8"
+        android:theme="@style/MyEditText"
+        android:hint="@string/searchHintString"
+    />
+
+    <ScrollView
+        style="@android:style/Widget.Material.Light.ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/navigation"
+        android:layout_alignTop="@id/imageButton"
+        android:layout_marginTop="45dp"
+        android:clipToPadding="true"
+        android:fadeScrollbars="false"
+        android:fillViewport="false"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:contentDescription="@string/picString"
+                app:srcCompat="@drawable/a1" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="83dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape">
+                
+                <LinearLayout
+                    android:id="@+id/layout_hotInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="fill"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:contentDescription="@string/inform"
+                        app:srcCompat="@drawable/ic_notifications_none_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/homepageHot1"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/homepageHot2"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textSize="14sp" />
+                    
+                </LinearLayout>
+                
+
+                <TextView
+                    android:id="@+id/textDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layout_hotInfo"
+                    android:text="@string/stringDay"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/textMonthYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/textDay"
+                    android:layout_alignBottom="@id/textDay"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:text="@string/stringMonthYear"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_mycourse"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_8"
+                    app:fontFamily="serif" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:text="@string/noMyCourse"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="@color/white"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/view_myCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/navigation"/>
+
+</RelativeLayout>
+
+
+

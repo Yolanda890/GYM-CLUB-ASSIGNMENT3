@@ -35,9 +35,9 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     @NonNull
     @Override
-    public CommunityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
-        return new CommunityAdapter.ViewHolder(v);  //this is the major change here.
+        return new ViewHolder(v);  //this is the major change here.
     }
 
     @Override

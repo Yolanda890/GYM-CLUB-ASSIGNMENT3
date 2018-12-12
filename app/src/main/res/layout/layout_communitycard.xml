@@ -28,16 +28,16 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="145dp"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@id/imageView"
-            android:layout_marginTop="@dimen/dp_8"
             android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
             app:srcCompat="@mipmap/default1" />
 
         <Button
@@ -46,17 +46,17 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignLeft="@id/imageView2"
-            android:layout_alignTop="@id/imageView2"/>
+            android:layout_alignTop="@id/imageView2" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="今日打卡！！"
-            android:layout_toRightOf="@id/imageView2"
+            android:layout_alignTop="@id/imageView2"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_4"
-            android:layout_alignTop="@id/imageView2"/>
+            android:layout_toRightOf="@id/imageView2"
+            android:text="今日打卡！！" />
 
     </RelativeLayout>
 

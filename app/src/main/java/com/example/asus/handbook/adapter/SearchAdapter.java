@@ -15,6 +15,7 @@ import com.example.asus.handbook.R;
 import com.example.asus.handbook.activity.CoachActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
@@ -25,8 +26,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     private List<String> list1;
     private List<String> list2;
+    private List<String> list3;
     private int rowLayout;
     private Context mContext;
+    private VideoAdapter videoAdapter;
 
                          /* 加2个参数 */
     public SearchAdapter(String type,String currentusername,List<String> list1,List<String> list2, int rowLayout, Context context) {
@@ -36,13 +39,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         this.list1 = list1;
         this.list2 = list2;
+        this.list3=new ArrayList<>();
         this.rowLayout = rowLayout;
         this.mContext = context;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final String entry = list1.get(i);
+
         viewHolder.myName.setText(entry);
         viewHolder.myButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +60,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                     intent.putExtra("coachname",entry);
                     mContext.startActivity(intent);
                 }
+                else{
+                    list3.add(entry);
+                    videoAdapter = new VideoAdapter(list3,R.layout.layout_videocard, mContext);
+                }
             }
         });
         Picasso.with(mContext).load(list2.get(i)).into(viewHolder.myPic);
@@ -63,9 +72,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @NonNull
     @Override
-    public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
-        return new SearchAdapter.ViewHolder(v);  //this is the major change here.
+        return new ViewHolder(v);  //this is the major change here.
     }
 
     @Override

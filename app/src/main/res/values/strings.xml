@@ -123,7 +123,15 @@
     <string name="sendMailSuccess">邮件发送成功！</string>
     <!-- 发送邮件 -->
 
+    <!-- 修改密码  -->
+    <string name="new_pass">新密码</string>
+    <string name="old_pass">旧密码</string>
+    <!-- 修改密码-->
 
-
+    <!-- 地图 -->
+    <string name="stringSetToOrigin">复位</string>
+    <string name="stringSetal">卫星</string>
+    <string name="stringDriveHere">路线规划</string>
+    <!-- 地图 -->
 
 </resources>

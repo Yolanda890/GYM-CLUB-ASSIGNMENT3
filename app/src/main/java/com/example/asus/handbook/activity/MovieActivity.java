@@ -119,7 +119,7 @@ public class MovieActivity extends AppCompatActivity {
             LayoutParams lp=(LayoutParams)first_image.getLayoutParams();
 //将宽度设置为屏幕的1/3
             lp.height=mHeight;
-            first_image.setLayoutParams(lp);
+           first_image.setLayoutParams(lp);
 
         } else {
             //竖屏时处理
@@ -229,13 +229,13 @@ public class MovieActivity extends AppCompatActivity {
                 //判断播放按钮的状态
                 if (videoView.isPlaying()) {
 
-                    videoView.setVisibility(View.VISIBLE);
-                    first_image.setVisibility(View.GONE);
-                    play_controller_image.setImageResource(R.drawable.play);
-                    //视频暂停
-                    videoView.pause();
-                    //当视频处于暂停状态，停止handler的刷新
-                    handler.removeMessages(UPDATA_VIDEO_NUM);
+                        videoView.setVisibility(View.VISIBLE);
+                        first_image.setVisibility(View.GONE);
+                        play_controller_image.setImageResource(R.drawable.play);
+                        //视频暂停
+                        videoView.pause();
+                        //当视频处于暂停状态，停止handler的刷新
+                        handler.removeMessages(UPDATA_VIDEO_NUM);
 
 
                 } else {
@@ -243,8 +243,8 @@ public class MovieActivity extends AppCompatActivity {
                     videoView.start();
 
 
-                    first_image.setVisibility(View.GONE);
-                    videoView.setVisibility(View.VISIBLE);
+                        first_image.setVisibility(View.GONE);
+                        videoView.setVisibility(View.VISIBLE);
 
 
                     //当视频播放时，通知刷新
@@ -380,11 +380,11 @@ public class MovieActivity extends AppCompatActivity {
         try {
             //（）根据文件路径获取缩略图
 //retriever.setDataSource(filePath);
-            retriever.setDataSource(url, new HashMap());
+           retriever.setDataSource(url, new HashMap());
             //获得第一帧图片
-            bitmap = retriever.getFrameAtTime();
+          bitmap = retriever.getFrameAtTime();
 
-            bitmap1 =zoomBitmap(bitmap, videoView.getWidth(),videoView.getHeight());       //filePath:文件路径
+           bitmap1 =zoomBitmap(bitmap, videoView.getWidth(),videoView.getHeight());       //filePath:文件路径
 
         }
         catch(IllegalArgumentException e) {

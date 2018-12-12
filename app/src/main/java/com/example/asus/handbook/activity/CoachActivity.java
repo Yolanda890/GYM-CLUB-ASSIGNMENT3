@@ -3,12 +3,12 @@ package com.example.asus.handbook.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.handbook.R;
+import com.example.asus.handbook.adapter.MyAdapter;
 import com.example.asus.handbook.dataobject.Coach;
 import com.example.asus.handbook.dataobject.Course;
 import com.squareup.picasso.Picasso;
@@ -235,7 +236,7 @@ public class CoachActivity extends AppCompatActivity {
             public void done(List<Coach> list, BmobException e) {
                 if(e == null){
                     if(list.size() != 0){
-                        emailAddress.setText("发送给："+coachName.getText().toString()+"("+list.get(0).getCoachmail()+")");
+                        emailAddress.setText("发送给："+coachName.getText().toString()+"("+list.get(0).getCoachemail()+")");
                     }
                     else{
                         Toast ts = Toast.makeText(CoachActivity.this,getResources().getString(getResources().getIdentifier("showMailAddressFail", "string", getPackageName())), Toast.LENGTH_LONG);
@@ -279,7 +280,7 @@ public class CoachActivity extends AppCompatActivity {
                                         if(list.size() != 0){
                                             /* 发送邮件 */
                                             // 收件人电子邮箱
-                                            String to = list.get(0).getCoachmail();
+                                            String to = list.get(0).getCoachemail();
 
                                             // 发件人电子邮箱
                                             String from = "yuzhou992999406@163.com";

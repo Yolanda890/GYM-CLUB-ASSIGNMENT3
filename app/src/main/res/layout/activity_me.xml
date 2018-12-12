@@ -23,6 +23,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_15"
             android:scaleType="centerCrop"
+            android:focusable="true"
+            android:clickable="true"
             app:srcCompat="@drawable/default1" />
 
         <LinearLayout
@@ -140,7 +142,24 @@
                     android:textSize="16sp" />
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="修改密码"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

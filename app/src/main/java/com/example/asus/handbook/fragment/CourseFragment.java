@@ -20,6 +20,7 @@ import com.example.asus.handbook.dataobject.Course;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
@@ -28,7 +29,7 @@ import cn.bmob.v3.listener.FindListener;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CourseFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CourseFragment#newInstance} factory method to
  * create an instance of this fragment.

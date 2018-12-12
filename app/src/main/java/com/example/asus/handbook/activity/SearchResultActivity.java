@@ -2,11 +2,11 @@ package com.example.asus.handbook.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +20,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.asus.handbook.R;
+import com.example.asus.handbook.adapter.SearchAdapter;
 import com.example.asus.handbook.dataobject.Coach;
+import com.example.asus.handbook.dataobject.Course;
 
 import java.util.ArrayList;
 import java.util.List;

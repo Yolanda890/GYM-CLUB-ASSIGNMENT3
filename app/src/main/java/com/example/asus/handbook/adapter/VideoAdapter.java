@@ -20,7 +20,6 @@ import com.example.asus.handbook.dataobject.Course;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
@@ -28,8 +27,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     private List<String> myList;
     private int rowLayout;
     private Context mContext;
-    private BmobFile coursevideo;
-    private String info;
 
 
     public VideoAdapter(List<String> myList, int rowLayout, Context context) {
@@ -65,19 +62,19 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public VideoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(rowLayout, viewGroup, false);
-        return new VideoAdapter.ViewHolder(v);  //this is the major change here.
+        return new ViewHolder(v);  //this is the major change here.
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        final String entry = myList.get(i);
+       final String entry = myList.get(i);
         viewHolder.myName.setText(entry);
         viewHolder.myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // viewHolder.myVideo.start();
+               // viewHolder.myVideo.start();
                 Intent intent = new Intent(mContext, MovieActivity.class);
                 intent.putExtra("uri",entry);
                 mContext.startActivity(intent);
@@ -106,12 +103,11 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         public Button myButton; // 对应播放的按钮
         public ViewHolder(View itemView) {
             super(itemView);
-            // myName =  itemView.findViewById(R.id.textView);
+           // myName =  itemView.findViewById(R.id.textView);
             myVideo = itemView.findViewById(R.id.main_video);
             //myButton = itemView.findViewById(R.id.imageButton);
         }
     }
-
 
     class MyPlayerOnCompletionListener implements MediaPlayer.OnCompletionListener {
         @Override

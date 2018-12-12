@@ -1,21 +1,19 @@
 package com.example.asus.handbook.activity;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
 import android.content.Intent;
-import java.util.ArrayList;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.net.Uri;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -24,13 +22,15 @@ import android.widget.Toast;
 import com.example.asus.handbook.R;
 import com.example.asus.handbook.fragment.CourseFragment;
 
+import java.util.ArrayList;
+
 public class SearchingActivity extends AppCompatActivity implements CourseFragment.OnFragmentInteractionListener{
 
     private BottomNavigationView navigationView;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ArrayList<Fragment> listFragment;
-    private MyAdapter myAdapter;
+    private MeAdapter myAdapter;
     private ImageButton searchButton;
     private Spinner spinner;
     private EditText editText;
@@ -141,7 +141,7 @@ public class SearchingActivity extends AppCompatActivity implements CourseFragme
         listFragment.add(fragment6);
 
         FragmentManager fm=getSupportFragmentManager();
-        myAdapter = new MyAdapter(fm);
+        myAdapter = new MeAdapter(fm);
         viewPager.setAdapter(myAdapter);
         //ViewPager的预加载解决办法
         viewPager.setOffscreenPageLimit(listFragment.size());
@@ -185,10 +185,9 @@ public class SearchingActivity extends AppCompatActivity implements CourseFragme
 
     }
 
+    class MeAdapter extends FragmentPagerAdapter {
 
-    class MyAdapter extends FragmentPagerAdapter {
-
-        private MyAdapter(FragmentManager fm) {
+        private MeAdapter(FragmentManager fm) {
             super(fm);
         }
         @Override
@@ -202,5 +201,6 @@ public class SearchingActivity extends AppCompatActivity implements CourseFragme
         }
 
     }
+
 
 }

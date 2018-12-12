@@ -1,17 +1,24 @@
 package com.example.asus.handbook.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.*;
-import android.widget.*;
-import android.support.annotation.NonNull;
-import android.support.design.widget.*;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.asus.handbook.R;
+import com.example.asus.handbook.adapter.MyAdapter;
 import com.example.asus.handbook.dataobject.Course;
 import com.example.asus.handbook.dataobject.SC;
 
